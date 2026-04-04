@@ -152,18 +152,6 @@ function findTransactionById(array $transactions, int $id): ?array
     return null;
 }
 
-/**
- * Ищет транзакцию по идентификатору с помощью array_filter.
- *
- * @param array $transactions Массив транзакций.
- * @param int $id Идентификатор транзакции.
- * @return array|null Найденная транзакция или null.
- */
-function findTransactionByIdWithFilter(array $transactions, int $id): ?array
-{
-    $filtered = array_filter($transactions, fn($transaction) => $transaction['id'] === $id);
-    return !empty($filtered) ? array_values($filtered)[0] : null;
-}
 
 /**
  * Возвращает количество дней с момента транзакции.

@@ -201,7 +201,8 @@ function addTransaction(int $id, string $date, float $amount, string $descriptio
     ];
 }
 ```
-
+#### Результат
+![О](Screenshot_1.png)
 #### Сортировка транзакций
 Для сортировки транзакций использовалась функция `usort()`.
 
@@ -227,6 +228,8 @@ usort($transactions, function ($a, $b) {
 ```php
 <p><strong>Общая сумма транзакций:</strong> <?= calculateTotalAmount($transactions) ?></p>
 ```
+#### Результат
+![О](Screenshot_2.png)
 
 ---
 
@@ -330,6 +333,8 @@ if ($files === false) {
 
 #### Результат
 В результате была получена веб-страница с хедером, навигационным меню, контентной частью и футером. Все изображения из папки `image` были автоматически считаны и выведены на экран в виде аккуратной галереи.
+#### Результат
+![О](Screenshot_3.png)
 
 ---
 

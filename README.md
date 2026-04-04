@@ -1,125 +1,207 @@
-# PHPLabs
-# Лабораторная работа №5  
-## Объектно-ориентированное программирование в PHP
+# Лабораторная работа №5
+## Дисциплина: PHP
+### Тема: Объектно-ориентированное программирование в PHP
 
-### Автор
-**ФИО:** Демченко Юрий
-**Группа:** IA2403
-**Дисциплина:** PHP
+**Выполнил:** студент группы IA2403, Демченко Юрий  
+**Проверила:** V. Vișnevschi  
+**Год:** 2026
 
 ---
 
 ## Цель работы
+Освоить основы объектно-ориентированного программирования в PHP на практике. Научиться создавать собственные классы, использовать инкапсуляцию для защиты данных, разделять ответственность между классами, а также применять интерфейсы для построения гибкой архитектуры приложения. :contentReference[oaicite:2]{index=2}
 
-Освоить основы объектно-ориентированного программирования в PHP на практике.  
-Научиться:
-
-- создавать собственные классы;
-- использовать инкапсуляцию для защиты данных;
-- разделять ответственность между классами;
-- применять интерфейсы для построения гибкой архитектуры приложения.
-
----
-
-## Условие задания
-
-Необходимо разработать приложение для управления банковскими транзакциями.
-
-Приложение должно обеспечивать:
-
-- хранение банковских транзакций;
-- добавление новых транзакций;
-- удаление транзакций;
-- поиск транзакций;
-- сортировку транзакций;
-- выполнение вычислений над коллекцией транзакций;
-- вывод данных в виде HTML-таблицы.
-
-В работе необходимо использовать объектно-ориентированный подход.  
-Также требуется использовать строгую типизацию, интерфейсы и документирование кода с помощью PHPDoc. :contentReference[oaicite:1]{index=1}
+## Условия работы
+- Создание классов в PHP
+- Использование строгой типизации
+- Реализация инкапсуляции
+- Разделение ответственности между классами
+- Работа с интерфейсами
+- Хранение, поиск, удаление и сортировка транзакций
+- Вывод данных в HTML-таблицу
+- Документирование методов с помощью PHPDoc :contentReference[oaicite:3]{index=3}
 
 ---
 
-## Реализованные классы
+## Ход работы
 
-### 1. `Transaction`
-Класс `Transaction` описывает одну банковскую транзакцию.
+### Задание 1. Включение строгой типизации
 
-#### Свойства:
-- `id` — уникальный идентификатор транзакции;
-- `date` — дата транзакции;
-- `amount` — сумма транзакции;
-- `description` — описание платежа;
-- `merchant` — получатель платежа.
+В начале файла `index.php` была включена строгая типизация:
 
-#### Методы:
-- `getId(): int`
-- `getDate(): string`
-- `getAmount(): float`
-- `getDescription(): string`
-- `getMerchant(): string`
-- `getDaysSinceTransaction(): int` — возвращает количество дней с момента транзакции до текущей даты.
+```php
+<?php
 
----
+declare(strict_types=1);
 
-### 2. `TransactionStorageInterface`
-Интерфейс для работы с хранилищем транзакций.
+<?php
 
-#### Методы:
-- `addTransaction(Transaction $transaction): void`
-- `removeTransactionById(int $id): void`
-- `getAllTransactions(): array`
-- `findById(int $id): ?Transaction`
+declare(strict_types=1);
 
-Использование интерфейса делает архитектуру более гибкой и позволяет в будущем заменить способ хранения данных без изменения бизнес-логики приложения.
+/**
+ * Класс, описывающий одну банковскую транзакцию.
+ */
+class Transaction
+{
+    private int $id;
+    private string $date;
+    private float $amount;
+    private string $description;
+    private string $merchant;
 
----
+    /**
+     * @param int $id Уникальный идентификатор транзакции
+     * @param string $date Дата транзакции
+     * @param float $amount Сумма транзакции
+     * @param string $description Описание платежа
+     * @param string $merchant Получатель платежа
+     */
+    public function __construct(
+        int $id,
+        string $date,
+        float $amount,
+        string $description,
+        string $merchant
+    ) {
+        $this->id = $id;
+        $this->date = $date;
+        $this->amount = $amount;
+        $this->description = $description;
+        $this->merchant = $merchant;
+    }
 
-### 3. `TransactionRepository`
-Класс `TransactionRepository` реализует интерфейс `TransactionStorageInterface` и отвечает за хранение данных.
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
-#### Основные функции:
-- добавление транзакции;
-- удаление транзакции по идентификатору;
-- получение списка всех транзакций;
-- поиск транзакции по `id`.
+    public function getDate(): string
+    {
+        return $this->date;
+    }
 
----
+    public function getAmount(): float
+    {
+        return $this->amount;
+    }
 
-### 4. `TransactionManager`
-Класс `TransactionManager` отвечает за бизнес-логику приложения и работает через интерфейс `TransactionStorageInterface`.
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
 
-#### Реализованные функции:
-- `calculateTotalAmount(): float` — вычисляет общую сумму всех транзакций;
-- `calculateTotalAmountByDateRange(string $startDate, string $endDate): float` — вычисляет сумму транзакций за указанный период;
-- `countTransactionsByMerchant(string $merchant): int` — считает количество транзакций по указанному получателю;
-- `sortTransactionsByDate(): array` — сортирует транзакции по дате;
-- `sortTransactionsByAmountDesc(): array` — сортирует транзакции по сумме по убыванию.
+    public function getMerchant(): string
+    {
+        return $this->merchant;
+    }
 
----
+    public function getDaysSinceTransaction(): int
+    {
+        $transactionDate = new DateTime($this->date);
+        $currentDate = new DateTime();
+        return (int)$transactionDate->diff($currentDate)->format('%a');
+    }
 
-### 5. `TransactionTableRenderer`
-Класс `TransactionTableRenderer` отвечает за формирование HTML-таблицы.
+    public function getMerchantCategory(): string
+    {
+        return match (strtolower($this->merchant)) {
+            'pyaterochka', 'magnit', 'lenta' => 'Супермаркет',
+            'ozon', 'wildberries', 'aliexpress' => 'Интернет-магазин',
+            'burger king', 'kfc', 'mcdonalds' => 'Фастфуд',
+            'shell', 'gazprom' => 'АЗС',
+            default => 'Другое',
+        };
+    }
+}
 
-#### Метод:
-- `render(array $transactions): string`
+interface TransactionStorageInterface
+{
+    public function addTransaction(Transaction $transaction): void;
 
-#### Выводимые столбцы:
-- ID транзакции;
-- дата;
-- сумма;
-- описание;
-- название получателя;
-- категория получателя;
-- количество дней с момента транзакции.
+    public function removeTransactionById(int $id): void;
 
----
+    public function getAllTransactions(): array;
 
-## Структура проекта
+    public function findById(int $id): ?Transaction;
+}
 
-Пример структуры проекта:
+/**
+ * Репозиторий для хранения транзакций.
+ */
+class TransactionRepository implements TransactionStorageInterface
+{
+    /**
+     * @var Transaction[]
+     */
+    private array $transactions = [];
 
-```text
-/project
-│── index.php
-│── README.md
+    public function addTransaction(Transaction $transaction): void
+    {
+        $this->transactions[] = $transaction;
+    }
+
+    public function removeTransactionById(int $id): void
+    {
+        foreach ($this->transactions as $key => $transaction) {
+            if ($transaction->getId() === $id) {
+                unset($this->transactions[$key]);
+            }
+        }
+
+        $this->transactions = array_values($this->transactions);
+    }
+
+    public function getAllTransactions(): array
+    {
+        return $this->transactions;
+    }
+
+    public function findById(int $id): ?Transaction
+    {
+        foreach ($this->transactions as $transaction) {
+            if ($transaction->getId() === $id) {
+                return $transaction;
+            }
+        }
+
+        return null;
+    }
+}/**
+ * Класс для вывода транзакций в виде HTML-таблицы.
+ */
+final class TransactionTableRenderer
+{
+    /**
+     * @param Transaction[] $transactions
+     * @return string
+     */
+    public function render(array $transactions): string
+    {
+        $html = '<table border="1" cellpadding="8" cellspacing="0">';
+        $html .= '<tr>';
+        $html .= '<th>ID транзакции</th>';
+        $html .= '<th>Дата</th>';
+        $html .= '<th>Сумма</th>';
+        $html .= '<th>Описание</th>';
+        $html .= '<th>Получатель</th>';
+        $html .= '<th>Категория получателя</th>';
+        $html .= '<th>Дней с момента транзакции</th>';
+        $html .= '</tr>';
+
+        foreach ($transactions as $transaction) {
+            $html .= '<tr>';
+            $html .= '<td>' . $transaction->getId() . '</td>';
+            $html .= '<td>' . htmlspecialchars($transaction->getDate()) . '</td>';
+            $html .= '<td>' . $transaction->getAmount() . '</td>';
+            $html .= '<td>' . htmlspecialchars($transaction->getDescription()) . '</td>';
+            $html .= '<td>' . htmlspecialchars($transaction->getMerchant()) . '</td>';
+            $html .= '<td>' . htmlspecialchars($transaction->getMerchantCategory()) . '</td>';
+            $html .= '<td>' . $transaction->getDaysSinceTransaction() . '</td>';
+            $html .= '</tr>';
+        }
+
+        $html .= '</table>';
+
+        return $html;
+    }
+}

@@ -191,6 +191,10 @@ function addTransaction(int $id, string $date, float $amount, string $descriptio
 ```
 #### Результат
 ![О](Images/Screenshot_3.png)
+
+![О](Images/Screenshot_4.png)
+
+![О](Images/Screenshot_5.png)
 #### Сортировка транзакций
 Для сортировки транзакций использовалась функция `usort()`.
 

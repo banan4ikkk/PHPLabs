@@ -473,6 +473,11 @@ echo $renderer->render($manager->sortTransactionsByAmountDesc());
 ---
 
 ## Результат работы
+![О](Images/Screenshot_7.png)
+
+![О](Images/Screenshot_1.png)
+
+![О](Images/Screenshot_2.png)
 
 В результате выполнения программы на странице отображается HTML-таблица со списком банковских транзакций.
 

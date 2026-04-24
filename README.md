@@ -579,6 +579,11 @@ final class MoodEntryTableRenderer
 
 ## Результат работы
 
+![О](Images/Screenshot_3.png)
+
+![О](Images/Screenshot_2.png)
+
+![О](Images/Screenshot_1.png)
 В результате выполнения лабораторной работы было создано PHP-приложение **«Дневник настроения»**.
 
 Приложение позволяет:

@@ -170,6 +170,8 @@ Password: admin123
 - база данных MySQL;
 - клиентская и серверная валидация форм.
 
+![О](Images/Screenshot_1.png)
+
 ---
 
 ## Функциональные возможности
@@ -185,8 +187,14 @@ Password: admin123
 - пароль;
 - повтор пароля.
 
+![О](Images/Screenshot_5.png)
+
 Пароль не сохраняется в базе данных в открытом виде. Для его защиты используется функция:
 
+![О](Images/Screenshot_6.png)
+![О](Images/Screenshot_7.png)
+![О](Images/Screenshot_8.png)
+![О](Images/Screenshot_9.png)
 ```php
 password_hash($password, PASSWORD_DEFAULT);
 ```
@@ -196,6 +204,8 @@ password_hash($password, PASSWORD_DEFAULT);
 ### 2. Вход в систему
 
 Пользователь может войти в систему по email и паролю.
+
+![О](Images/Screenshot_10.png)
 
 Проверка пароля выполняется с помощью функции:
 
@@ -232,6 +242,8 @@ session_destroy();
 
 На ней отображаются последние добавленные книги из базы данных.
 
+![О](Images/Screenshot_11.png)
+
 Пример SQL-запроса:
 
 ```php
@@ -258,6 +270,8 @@ $stmt = $pdo->query(
 - статус;
 - кнопка для просмотра подробной информации.
 
+![О](Images/Screenshot_2.png)
+
 ---
 
 ### 6. Просмотр подробной информации о книге
@@ -274,6 +288,8 @@ $stmt = $pdo->query(
 - пользователь, который добавил книгу;
 - полное описание книги.
 
+![О](Images/Screenshot_3.png)
+
 ---
 
 ### 7. Добавление книги
@@ -288,6 +304,8 @@ $stmt = $pdo->query(
 - год издания;
 - описание;
 - статус.
+
+![О](Images/Screenshot_12.png)
 
 Форма содержит больше 5 полей разных типов:
 
@@ -308,6 +326,8 @@ $stmt = $pdo->query(
 - по названию;
 - по автору;
 - по жанру.
+
+![О](Images/Screenshot_4.png)
 
 Пример фрагмента SQL-запроса для поиска:
 
@@ -341,6 +361,8 @@ if ($genreId !== '') {
 - удаление книги;
 - административная панель.
 
+![О](Images/Screenshot_13.png)
+
 Проверка авторизации выполняется через функцию `requireAuth()`.
 
 ```php
@@ -373,6 +395,12 @@ function requireAuth(): void
 - удаление любых книг;
 - доступ к административной панели.
 
+  ![О](Images/Screenshot_13.png)
+  ![О](Images/Screenshot_14.png)
+  ![О](Images/Screenshot_15.png)
+  ![О](Images/Screenshot_16.png)
+  ![О](Images/Screenshot_17.png)
+  ![О](Images/Screenshot_18.png)
 Проверка администратора выполняется через функцию `requireAdmin()`.
 
 ```php
